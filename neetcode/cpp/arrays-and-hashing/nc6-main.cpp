@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include "../headers/lc_debug.h"
 
 class Solution {
 public:
@@ -90,15 +91,12 @@ int main() {
 
     std::string output1 {};
     output1 = sol.encode(input);
-    std::cout << "Encoded string: " << output1 << std::endl;
+    std::cout << "Encoded string: ";
+    println("Encoded string", output1);
 
     std::vector<std::string> output2 {};
     output2 = sol.decode(output1);
-    std::cout << "Decoded strings: ";
-    for (const auto & str : output2) {
-        std::cout << str << ", ";
-    }
-    std::cout << std::endl;
+    println("Decoded strings", output2);
 
     return 0;
 }
