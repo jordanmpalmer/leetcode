@@ -1,73 +1,52 @@
 #include <bits/stdc++.h>
-using namespace std;
+// using namespace std;
 
 class Solution {
-public:
-    vector<vector<string>> groupAnagrams(vector<string>& strs) {
-        
-        vector<vector<string>> result {{}};
-        vector<string>
-        for (string str : strs) {
-            sort(str.begin(), str.end());
-            result[0].push_back(str);
+  public:
+    std::vector<std::vector<std::string>> groupAnagrams(std::vector<std::string> &strs) {
+
+        std::vector<std::vector<std::string>> results;
+        std::unordered_map<std::string, std::vector<std::string>> hashMap;
+        for (const auto &str : strs) {
+            std::array<int, 26> map_index{};
+            for (char ch : str) {
+                map_index[ch - 'a']++;
+            }
+
+            std::string hashIndex = "";
+            for (int val : map_index) {
+                hashIndex.append(std::to_string(val) + ',');
+            }
+            hashMap[hashIndex].push_back(str);
+        }
+        for (const auto &pair : hashMap) {
+            results.push_back(pair.second);
         }
 
-        return result;
+        return results;
     }
 };
 
-void printInt(int i) {
-    cout << i << endl;
-}
-
-void printVector(vector<string> i) {
-    for (string val : i) {
-        cout << val << endl;
-    }
-}
-
-void printNestedVector(vector<vector<string>> i) {
-    for (vector<string> j : i) {
-        for (string val : j) {
-            cout << val << endl;
+void printAnswer(std::vector<std::vector<std::string>> result) {
+    std::cout << "===================" << std::endl;
+    for (std::vector<std::string> vec : result) {
+        for (std::string str : vec) {
+            std::cout << str << " ";
         }
+        std::cout << std::endl;
     }
+    std::cout << "===================" << std::endl;
 }
-// Group Anagrams
-// Given an array of strings strs, group all anagrams together into sublists. You may return the output in any order.
-//
-// An anagram is a string that contains the exact same characters as another string, but the order of the characters can be different.
-//
-// Example 1:
-//
-// Input: strs = ["act","pots","tops","cat","stop","hat"]
-//
-// Output: [["hat"],["act", "cat"],["stop", "pots", "tops"]]
-// Example 2:
-//
-// Input: strs = ["x"]
-//
-// Output: [["x"]]
-// Example 3:
-//
-// Input: strs = [""]
-//
-// Output: [[""]]
-// Constraints:
-//
-// 1 <= strs.length <= 1000.
-// 0 <= strs[i].length <= 100
-// strs[i] is made up of lowercase English letters.
+
 int main() {
     Solution sol;
-    vector<vector<string>> result;
 
-    vector<string> input {"act", "pots", "tops", "cat", "stop", "hat"};
+    std::vector<std::string> input1{"act", "pots", "tops", "cat", "stop", "hat"};
+    std::vector<std::vector<std::string>> results;
+    std::vector<std::string> input2{"bdddddddddd", "bbbbbbbbbbc"};
 
-    result = sol.groupAnagrams(input);
-
-    printNestedVector(result);
+    printAnswer(sol.groupAnagrams(input1));
+    printAnswer(sol.groupAnagrams(input2));
 
     return 0;
 }
-
